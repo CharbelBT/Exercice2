@@ -2,7 +2,7 @@ import os
 import yaml
 
 
-with open('manual.yml', 'r') as file:
+with open('.github/workflows/manual.yml', 'r') as file:
     config = yaml.safe_load(file)
 
 env_var1 = config['env']['a']
