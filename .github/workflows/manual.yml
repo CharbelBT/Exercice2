@@ -1,0 +1,54 @@
+name: manual_workflow
+
+on: 
+  workflow_dispatch:
+
+env:
+  a: 3    
+  b: 8
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Verifier que a et b sont >0
+      run: |
+        if [ ${{ env.a }} -gt 0 ] && [ ${{ env.b }} -gt 0 ]; then
+          echo "a et b sont strictement postives"
+         
+        else
+          echo "a ou b est strictement negative"
+        fi
+
+    - name: Afficher la valeur de a et b
+      run: echo "La variable a est ${{ env.a }} et la variable b est ${{ env.b }}
+
+        
+  job2:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Installer les dépendances
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Executer un fichier python qui prend affiche la multiplication de a et b
+      run: python script.py
+
+
